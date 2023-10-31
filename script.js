@@ -5,8 +5,7 @@ const ctx = canvas.getContext("2d");
 const atoms = [];
 
 class Atomo {
-  draw(x, y, radius, color) {
-  }
+  draw(x, y, radius, color) {}
 
   update() {}
 }
