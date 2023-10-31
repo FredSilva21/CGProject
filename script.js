@@ -6,12 +6,6 @@ const atoms = [];
 
 class Atomo {
   draw(x, y, radius, color) {
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2);
-    ctx.fillStyle = "#000";
-    ctx.fill();
-    ctx.stroke();
-    ctx.closePath();
   }
 
   update() {}
