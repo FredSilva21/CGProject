@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simulador de Moléculas</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="800"></canvas>
+    <div>
+      <div>
+          <!--Start-->
+          <button type="button">Começar</button>
+          <!--Resett-->
+          <button type="button" disabled>Recomeçar</button>
+      </div>
+      
+
+      <!--Temperatura-->
+      <p>
+        <label for="temperatura">Temperatura:</label>
+        <input type="range" max="100" min="0" step="1" value="0" id="temperatura">
+        Valor
+      </p>
+      <!--Pressão-->
+      <p>
+        <label for="pressao">Pressão:</label>
+        <input type="range" max="100" min="0" step="1" value="0" id="pressao">
+        Valor
+      </p>
+  </div>
+    <script src="script.js"></script>
+  </body>
+</html>
