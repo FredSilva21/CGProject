@@ -48,10 +48,12 @@ class Atomo {
 
 // class para as particulas no interior do circulo
 class Particulas {
-  constructor(x = 0, y = 0) {
+  constructor(effect) {
+    this.effect = effect;
     this.x = x;
     this.y = y;
-    this.radius = Math.random() * 20;
+    this.gravity = this.radius * 0.001;
+    this.radius = Math.floor(Math.random() * 7 + 1);
     this.dx = Math.random() * 2;
   }
 
@@ -68,3 +70,11 @@ class Particulas {
     this.y = Math.random() * this.y - this.dx;
   }
 }
+
+const animate = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  handle;
+  requestAnimationFrame(animate);
+};
+
+animate();
