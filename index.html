@@ -11,23 +11,23 @@
     <div>
       <div>
         <!--Start-->
-        <button type="button">Começar</button>
-        <!--Resett-->
-        <button type="button" disabled>Recomeçar</button>
+        <button type="button" id="start">Start</button>
+        <!--Reset-->
+        <button type="button" id="restart" disabled>Restart</button>
       </div>
 
-      <!--Temperatura-->
+      <!--Temperature-->
       <p>
-        <label for="temperatura">Temperatura:</label>
+        <label for="temperatureLabel">Temperature:</label>
         <input
           type="range"
           max="100"
           min="0"
           step="1"
           value="0"
-          id="temperatura"
+          id="temperatureRangeInput"
         />
-        Valor
+        <span id="temperatureValueDisplay">1</span>
       </p>
     </div>
     <script src="script.js"></script>

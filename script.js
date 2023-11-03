@@ -1,31 +1,48 @@
-//Elementos do Canvas
+// Canvas Element
 const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-const ctx = canvas.getContext("2d");
 
-//Botões
-const comecar = document.getElementById("comecar");
-const recomecar = document.getElementById("recomecar");
+// DOM Elements Retrieval
+const start = document.getElementById("start");
+const restart = document.getElementById("restart");
+const temperatureRangeInput = document.getElementById("temperatureRangeInput");
+const temperatureValueDisplay = document.getElementById(
+  "temperatureValueDisplay"
+);
 
-comecar.addEventListener("click", () => {
-  if ((comecar.textContent = "Começar")) {
-    comecar.textContent = "Parar";
-    recomecar.disabled = false;
+// Array to store the atoms
+const atoms = [];
+// Defining the starting value
+let temperature = 1;
+
+// Click event to place the atoms
+canvas.addEventListener("click", createAtoms);
+
+// Evaluate the value of the range input
+temperatureRangeInput.addEventListener("input", () => {
+  temperature = this.value;
+  temperatureValueDisplay.textContent = temperature;
+});
+
+start.addEventListener("click", () => {
+  if ((start.textContent = "Start")) {
+    start.textContent = "Stop";
+    restart.disabled = false;
   } else {
-    comecar.textContent = "Parar";
+    start.textContent = "Stop";
   }
 });
 
-// Array para guardar os átomos
-const atoms = [];
+const criarAtomos = (e) => {};
 
 // Class para o circulo que contem as particulas
 class Atomo {
   constructor(
     x,
     y,
-    raioNucleo,
+    radius,
     corNucleo,
     numeroEletrons,
     raioOrbita,
@@ -33,7 +50,7 @@ class Atomo {
   ) {
     this.x = x; // Coordenada x do centro do átomo no canvas
     this.y = y; // Coordenada y do centro do átomo no canvas
-    this.raioNucleo = raioNucleo; // Raio do núcleo
+    this.radius = radius; // Radius do núcleo
     this.corNucleo = corNucleo; // Cor do núcleo
     this.numeroEletrons = numeroEletrons; // Número de elétrons
     this.raioOrbita = raioOrbita; // Raio da órbita dos elétrons
@@ -46,22 +63,24 @@ class Atomo {
   draw() {}
 }
 
-// class para as particulas no interior do circulo
-class Particulas {
-  constructor(effect) {
-    this.effect = effect;
+// Class for the particles inside the circle
+class Particles {
+  constructor(x, y, radius, speed, angle, color) {
     this.x = x;
     this.y = y;
-    this.gravity = this.radius * 0.001;
-    this.radius = Math.floor(Math.random() * 7 + 1);
-    this.dx = Math.random() * 2;
+    this.radius = radius;
+    this.speed = speed;
+    this.angle = angle;
+    this.color = color;
+    this.magnitude = 2;
+    this.OffsetX = Math.random() * this.magnitude;
+    this.OffsetY = Math.random() * this.magnitude;
   }
 
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-    ctx.strokeStyle = "#000";
-    ctx.stroke();
+    ctx.fillStyle = this.color;
     ctx.fill();
   }
 
