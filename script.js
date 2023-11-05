@@ -17,25 +17,23 @@ const atoms = [];
 // Defining the starting value
 let temperature = 1;
 
-// Click event to place the atoms
-canvas.addEventListener("click", createAtoms);
-
 // Evaluate the value of the range input
 temperatureRangeInput.addEventListener("input", () => {
-  temperature = this.value;
+  temperature = temperatureRangeInput.value;
   temperatureValueDisplay.textContent = temperature;
+  console.log(temperature);
 });
 
-start.addEventListener("click", () => {
-  if ((start.textContent = "Start")) {
-    start.textContent = "Stop";
-    restart.disabled = false;
-  } else {
-    start.textContent = "Stop";
-  }
-});
+// start.addEventListener("click", () => {
+//   if ((start.textContent = "Start")) {
+//     start.textContent = "Stop";
+//     restart.disabled = false;
+//   } else {
+//     start.textContent = "Stop";
+//   }
+// });
 
-const criarAtomos = (e) => {};
+const createAtoms = (e) => {};
 
 // Class para o circulo que contem as particulas
 class Atomo {
@@ -90,10 +88,9 @@ class Particles {
   }
 }
 
-const animate = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  handle;
-  requestAnimationFrame(animate);
-};
+// Click event to place the atoms
+canvas.addEventListener("click", createAtoms);
+
+const animate = () => {};
 
 animate();
