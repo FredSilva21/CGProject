@@ -17,7 +17,7 @@ const atoms = [];
 // Defining the starting value
 let temperature = 1;
 
-// Evaluate the value of the range input
+// Evaluate the value of the range input | Functional
 temperatureRangeInput.addEventListener("input", () => {
   temperature = temperatureRangeInput.value;
   temperatureValueDisplay.textContent = temperature;
@@ -62,30 +62,37 @@ class Atomo {
 }
 
 // Class for the particles inside the circle
-class Particles {
-  constructor(x, y, radius, speed, angle, color) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.speed = speed;
-    this.angle = angle;
-    this.color = color;
-    this.magnitude = 2;
-    this.OffsetX = Math.random() * this.magnitude;
-    this.OffsetY = Math.random() * this.magnitude;
+class Particle {
+  constructor(
+    canvas,
+    temperatureRangeInput,
+    temperatureValueDisplay,
+    containerRadius
+  ) {
+    this.canvas = canvas;
+    this.temperatureRangeInput = temperatureRangeInput;
+    this.temperatureValueDisplay = temperatureValueDisplay;
+    this.containerRadius = containerRadius;
   }
 
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-    ctx.fillStyle = this.color;
-    ctx.fill();
+  createParticles() {
+    const centerX = this.canvas.width / 2;
+    const centerY = this.canvas.height / 2;
+    const radius = 10;
+    const temperature = this.temperatureRangeInput.value;
+    const speed = temperature / 10;
+    const angle = Math.random() * 2 * Math.PI;
+    const color = Math.random() * 1 ? "blue" : "orange";
+
+    const x = centerX + Math.cos(angle) * (this.containerRadius - radius);
+    const y = centerY + Math.sin(angle) * (this.containerRad - radius);
+
+    atoms.push(new Particle(x, y, radius, speed, color, this.containerRadius));
   }
 
-  move() {
-    this.x = Math.random() * this.x + this.dx;
-    this.y = Math.random() * this.y - this.dx;
-  }
+  draw() {}
+
+  move() {}
 }
 
 // Click event to place the atoms
