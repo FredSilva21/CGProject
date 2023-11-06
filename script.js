@@ -11,11 +11,16 @@ const temperatureRangeInput = document.getElementById("temperatureRangeInput");
 const temperatureValueDisplay = document.getElementById(
   "temperatureValueDisplay"
 );
+const simulation = document.getElementById("simulation");
+const menuAccess = document.getElementById("menuAccess");
 
 // Array to store the atoms
 const atoms = [];
 // Defining the starting value
 let temperature = 1;
+
+// Boolean to check whether the simulation is running or not
+let simulationOnGoing = false;
 
 // Evaluate the value of the range input | Functional
 temperatureRangeInput.addEventListener("input", () => {
@@ -25,13 +30,34 @@ temperatureRangeInput.addEventListener("input", () => {
 });
 
 // start.addEventListener("click", () => {
-//   if ((start.textContent = "Start")) {
-//     start.textContent = "Stop";
-//     restart.disabled = false;
-//   } else {
-//     start.textContent = "Stop";
+//   menuAccess.display = "none";
+//   simulation.style.display = "block";
+//   start.styles.display = "none";
+
+//   if (!simulationOnGoing) {
+//     simulationOnGoing = true;
 //   }
 // });
+
+start.addEventListener("click", () => {
+  if (!simulationOnGoing) {
+    // startSimulation();
+    start.style.display = "none";
+    restart.style.display = "block";
+    simulationOnGoing = true;
+  }
+});
+
+restart.addEventListener("click", () => {
+  if (simulationOnGoing) {
+    // resetSimulation();
+    start.style.display = "block";
+    restart.style.display = "none";
+    temperatureRangeInput.style.display = "none";
+    temperatureValueDisplay.style.display = "none";
+    simulationOnGoing = false;
+  }
+});
 
 const createAtoms = (e) => {};
 
