@@ -1,6 +1,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-
+const W = canvas.width,
+  H = canvas.height;
 window.addEventListener("load", followMouse); // Remova os parênteses aqui
 
 let animationFrameId;
@@ -47,3 +48,46 @@ function startSimulation() {
   console.log("TESTE");
 }
 
+// Atom Creation
+function atom() {
+  // Outer circle
+  drawCircle(200, 200, 100);
+  // Inner circle
+  drawCircle(200, 200, 40);
+  // Electrons on top of the circle
+  drawElectrons();
+}
+
+// Object to the creation of the electrons
+let electrons = {
+  color: "blue",
+  D: 20,
+  R: 100,
+  numElectrons: 8, // Number of electrons
+  ang: 0,
+
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    let posX = 200 + this.R * Math.cos((Math.PI / 180) * this.ang);
+    let posY = 200 + this.R * Math.sin((Math.PI / 180) * this.ang);
+    ctx.arc(posX, posY, this.D / 2, 0, 2 * Math.PI);
+    ctx.fill();
+  },
+};
+// For loop to generate several electrons
+function drawElectrons() {
+  for (let i = 0; i < electrons.numElectrons; i++) {
+    electrons.draw();
+    electrons.ang += 360 / electrons.numElectrons; // Spread electrons evenly
+  }
+}
+
+// Drawing the circle
+function drawCircle(x, y, radius) {
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, 2 * Math.PI);
+  ctx.stroke();
+}
+
+atom();
