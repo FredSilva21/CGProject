@@ -1,83 +1,49 @@
-const startButton = document.getElementById("startButton");
-const restartButton = document.getElementById("restartButton");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-window.addEventListener("load", followMouse());
+window.addEventListener("load", followMouse); // Remova os parênteses aqui
 
 let animationFrameId;
 let menuCircles = [];
 
 let simulationRunning = false;
 let electronSpeed = 50;
-let protonCount = 1; // Set an initial proton count
-let atomCount = 0;
 
-startButton.addEventListener("click", () => {
-  if (!simulationRunning) {
-    startSimulation();
-    startButton.style.display = "none";
-    restartButton.style.display = "block";
-    simulationRunning = true;
-  }
-});
-
-restartButton.addEventListener("click", () => {
-  if (simulationRunning) {
-    resetSimulation();
-    startButton.style.display = "block";
-    restartButton.style.display = "none";
-    simulationRunning = false;
-  }
-});
-
-//Menu Functions
-function drawCircle(x, y) {
-  ctx.fillStyle = "red";
-  ctx.beginPath();
-  ctx.arc(x, y, 20, 0, 2 * Math.PI);
-  ctx.fill();
-}
-
-for (let i = 0; i < 10; i++) {
-  const x = Math.random() * canvas.width;
-  const y = Math.random() * canvas.height;
-  menuCircles.push({ x, y });
-}
-
-function animateCircles() {
-  requestAnimationFrame(animateCircles);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  for (let i = 0; i < menuCircles.length; i++) {
-    const circle = menuCircles[i];
-    drawCircle(circle.x, circle.y);
-  }
-}
 function followMouse() {
-  canvas.addEventListener("mousemove", (event) => {
-    for (let i = 0; i < menuCircles.length; i++) {
-      const circle = menuCircles[i];
-      const dx = event.clientX - circle.x;
-      const dy = event.clientY - circle.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
+  const container = document.querySelector(".container");
 
-      if (distance > 10) {
-        const angle = Math.atan2(dy, dx);
-        const moveDistance = distance - 10; // Move the circle 10 pixels closer to the mouse
-        const moveX = Math.cos(angle) * moveDistance * 0.05; // Adjust the 0.05 value for smoother transition
-        const moveY = Math.sin(angle) * moveDistance * 0.05; // Adjust the 0.05 value for smoother transition
+  for (let i = 0; i < 16; i++) {
+    const pElement = document.createElement("p");
+    pElement.innerHTML = `<img src="red-circle-icon.svg" width="30" height="30" id="circle"></img>`;
+    container.appendChild(pElement);
 
-        // Update the circle's position
-        circle.x += moveX;
-        circle.y += moveY;
-      }
-    }
+    // Posiciona as imagens aleatoriamente no início com algum espaçamento
+    const randomX = Math.random() * (container.clientWidth - 30); // Subtrai 30 para evitar que as imagens fiquem fora do container
+    const randomY = Math.random() * (container.clientHeight - 30); // Subtrai 30 para evitar que as imagens fiquem fora do container
+    pElement.style.left = randomX + "px";
+    pElement.style.top = randomY + "px";
+  }
+
+  container.addEventListener("mousemove", function (event) {
+    updatePElementsPosition(event);
   });
 }
 
-animateCircles();
+function updatePElementsPosition(event) {
+  const pElements = document.querySelectorAll(".container p");
+
+  pElements.forEach((pElement, index) => {
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+
+    const offset = 10 * (index + 1);
+
+    pElement.style.left = mouseX - offset + "px";
+    pElement.style.top = mouseY - offset + "px";
+  });
+}
 
 function startSimulation() {
   console.log("TESTE");
 }
+
