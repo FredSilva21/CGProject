@@ -58,12 +58,12 @@ function atom() {
   drawElectrons();
 }
 
-// Object to the creation of the electrons
+// Object to the creation of the electrons oxygen
 let electrons = {
   color: "blue",
   D: 20,
   R: 100,
-  numElectrons: 8, // Number of electrons
+  numElectrons: 6, // Outside electrons
   ang: 0,
 
   draw() {
@@ -79,7 +79,7 @@ let electrons = {
 function drawElectrons() {
   for (let i = 0; i < electrons.numElectrons; i++) {
     electrons.draw();
-    electrons.ang += 360 / electrons.numElectrons; // Spread electrons evenly
+    electrons.ang += 360 / electrons.numElectrons;
   }
 }
 
@@ -87,6 +87,7 @@ function drawElectrons() {
 function drawCircle(x, y, radius) {
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, 2 * Math.PI);
+  ctx.strokeStyle = "rgba(255,255,255)";
   ctx.stroke();
 }
 
