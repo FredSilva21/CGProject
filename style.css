@@ -7,13 +7,13 @@
   font-size: 16px;
 }
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-/*First Page*/
 .container {
   display: flex;
   justify-content: center;
@@ -24,6 +24,22 @@ body, html {
   z-index: 1; /* Ensure the menu is above the background */
 }
 
+h1 {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
 #menuAccess {
   text-align: center;
   padding: 20px;
@@ -31,23 +47,14 @@ body, html {
   color: #fff;
   border-radius: 10px;
   z-index: 2; /* Increased z-index for the menu to be above the background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-#menuAccess h1{
-  font-size: 28pt;
-  background-color: transparent;
-  padding:10px 20px
-
 }
 
 #startButton {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
   border: none;
   border-radius: 5px;
 }
@@ -60,11 +67,9 @@ body, html {
   height: 100vh;
   background-color: #111;
   overflow: hidden;
-  z-index: 1; /* Lower z-index to ensure the background is behind the menu */;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 1; /* Lower z-index to ensure the background is behind the menu */
 }
+
 .ball {
   position: absolute;
   width: 20px;
@@ -79,62 +84,44 @@ body, html {
     transform: translateX(100vw);
   }
   to {
-    transform: translateX(-100vw);
+    transform: translateX(-100px);
   }
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  width: 800px; /* Largura desejada */
+  height: 800px; /* Altura desejada */
+}
 
+#menuAccess {
+  text-align: center;
+}
 
-/*Second Page*/
-canvas {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+#menuAccess h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#startButton {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #0074d9;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
 #simulation {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  box-sizing: border-box;
+  display: none;
 }
-
-#temperature,#restart{
-  opacity: 0;
-  animation: fadeIn 1s ease-in-out forwards;
-  align-self: center
-}
-
-#temperatureRangeInput{
-  color: red;
-}
-
-#temperature label,#temperatureValueDisplay{
-    color: white;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes shake {
-  0% {transform: translateX(0);}
-  10%, 90% {transform: translateX(-5px);}
-  20%, 80% {transform: translateX(5px);}
-  30%, 50%, 70% {transform: translateX(-5px);}
-  40%, 60% {transform: translateX(5px);}
-  100% {transform: translateX(0);}
+.container p {
+  position: absolute; /* Usar position absolute para elementos filho */
+  transition: left 0.2s ease, top 0.2s ease; /* Adicione transições */
+  background: transparent;
 }
 
 button {
