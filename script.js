@@ -50,9 +50,9 @@ function atom() {
   // Inner circle
   circle.drawCircle2(200, 200, 40);
   // Electrons on top of the circle
-  drawElectrons();
+  molecule.drawElectrons();
   // Electrons on top of the inner circle
-  drawElectrons2();
+  molecule.drawElectrons2();
   // Protons in the middle of the circle
   drawProtons();
 }
@@ -85,7 +85,6 @@ let electrons = {
   },
 };
 
-
 let circle = {
   // Drawing the outer circle
   drawCircle(x, y, radius) {
@@ -93,31 +92,32 @@ let circle = {
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
     ctx.strokeStyle = "rgba(255,255,255)";
     ctx.stroke();
-  }
-  ,
+  },
   // Drawing the inner circle
   drawCircle2(x, y, radius) {
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
     ctx.strokeStyle = "rgba(255,255,255)";
     ctx.stroke();
-  }
-}
-// For loop to generate several electrons
-function drawElectrons() {
-  for (let i = 0; i < electrons.numElectrons; i++) {
-    electrons.draw();
-    electrons.ang += 360 / electrons.numElectrons;
-  }
-}
+  },
+};
 
-function drawElectrons2() {
-  for (let i = 0; i < electrons.numElectronsInside; i++) {
-    electrons.drawInner();
-    electrons.ang += 360 / electrons.numElectronsInside;
-  }
-}
+let molecule = {
+  // For loop to generate several electrons
+  drawElectrons() {
+    for (let i = 0; i < electrons.numElectrons; i++) {
+      electrons.draw();
+      electrons.ang += 360 / electrons.numElectrons;
+    }
+  },
 
+  drawElectrons2() {
+    for (let i = 0; i < electrons.numElectronsInside; i++) {
+      electrons.drawInner();
+      electrons.ang += 360 / electrons.numElectronsInside;
+    }
+  },
+};
 
 function drawProtons() {
   console.log("Protons");
