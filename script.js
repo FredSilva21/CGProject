@@ -56,6 +56,8 @@ function atom() {
   drawCircle2(200, 200, 40);
   // Electrons on top of the circle
   drawElectrons();
+  // Electrons on top of the inner circle
+  drawElectrons2();
   // Protons in the middle of the circle
   drawProtons();
 }
@@ -77,12 +79,27 @@ let electrons = {
     ctx.arc(posX, posY, this.D / 2, 0, 2 * Math.PI);
     ctx.fill();
   },
+
+  drawInner() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    let posX = 165 + this.R * Math.cos((Math.PI / 240) * this.ang);
+    let posY = 200 + this.R * Math.sin((Math.PI / 180) * this.ang);
+    ctx.arc(posX, posY, this.D / 2, 0, 2 * Math.PI);
+    ctx.fill();
+  },
 };
 // For loop to generate several electrons
 function drawElectrons() {
   for (let i = 0; i < electrons.numElectrons; i++) {
     electrons.draw();
     electrons.ang += 360 / electrons.numElectrons;
+  }
+}
+
+function drawElectrons2() {
+  for (let i = 0; i < electrons.numElectronsInside; i++) {
+    electrons.drawInner();
     electrons.ang += 360 / electrons.numElectronsInside;
   }
 }
