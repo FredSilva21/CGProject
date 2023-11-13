@@ -30,14 +30,23 @@ body, html {
   color: #fff;
   border-radius: 10px;
   z-index: 2; /* Increased z-index for the menu to be above the background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#menuAccess h1{
+  font-size: 28pt;
+  background-color: transparent;
+  padding:10px 20px
+
 }
 
 #startButton {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #4CAF50;
-  color: #fff;
   border: none;
   border-radius: 5px;
 }
@@ -50,9 +59,11 @@ body, html {
   height: 100vh;
   background-color: #111;
   overflow: hidden;
-  z-index: 1; /* Lower z-index to ensure the background is behind the menu */
+  z-index: 1; /* Lower z-index to ensure the background is behind the menu */;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .ball {
   position: absolute;
   width: 20px;
@@ -67,7 +78,7 @@ body, html {
     transform: translateX(100vw);
   }
   to {
-    transform: translateX(-100px);
+    transform: translateX(-100vw);
   }
 }
 
@@ -83,26 +94,41 @@ body, html {
   height: 800px; /* Altura desejada */
 }
 
-#menuAccess {
-  text-align: center;
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
-#menuAccess h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+#simulation {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-#startButton {
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: #0074d9;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+#temperature,#restart{
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
-#simulation{
-  display: none;
+#temperature label,#temperatureValueDisplay{
+    color: white;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 .container p {
   position: absolute; /* Usar position absolute para elementos filho */
