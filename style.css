@@ -34,6 +34,10 @@
   cursor: pointer;
 }
 
+#simulation{
+  display: none;
+}
+
 .container p {
   position: absolute; /* Usar position absolute para elementos filho */
   transition: left 0.2s ease, top 0.2s ease; /* Adicione transições */

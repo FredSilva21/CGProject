@@ -1,8 +1,41 @@
+window.addEventListener("DOMContentLoaded", function () {
+  // Create additional balls dynamically
+  const numBalls = 20; // Adjust the number of balls
+  const background = document.querySelector(".background");
+
+  for (let i = 0; i < numBalls; i++) {
+    const ball = document.createElement("div");
+    ball.className = "ball";
+    ball.style.top = `${Math.random() * 100}vh`;
+    ball.style.animationDuration = `${Math.random() * 3 + 1}s`; // Adjust animation duration
+    background.appendChild(ball);
+  }
+});
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const W = canvas.width,
   H = canvas.height;
-window.addEventListener("load", followMouse); // Remova os parênteses aqui
+
+function startSimulation() {
+  const particles = [];
+
+  for (let i = 0; i < 16; i++) {
+    const particle = {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: 15,
+      color: "yellow",
+      speed: Math.random() * 5 + 1,
+      angle: Math.random() * 2 * Math.PI,
+    };
+
+    particles.push(particle);
+  }
+
+  simulationRunning = true;
+  animate(particles);
+}
 
 let animationFrameId;
 let menuCircles = [];
@@ -10,50 +43,12 @@ let menuCircles = [];
 let simulationRunning = false;
 let electronSpeed = 50;
 
-function followMouse() {
-  const container = document.querySelector(".container");
-
-  for (let i = 0; i < 16; i++) {
-    const pElement = document.createElement("p");
-    pElement.innerHTML = `<img src="red-circle-icon.svg" width="30" height="30" id="circle"></img>`;
-    container.appendChild(pElement);
-
-    // Posiciona as imagens aleatoriamente no início com algum espaçamento
-    const randomX = Math.random() * (container.clientWidth - 30); // Subtrai 30 para evitar que as imagens fiquem fora do container
-    const randomY = Math.random() * (container.clientHeight - 30); // Subtrai 30 para evitar que as imagens fiquem fora do container
-    pElement.style.left = randomX + "px";
-    pElement.style.top = randomY + "px";
-  }
-
-  container.addEventListener("mousemove", function (event) {
-    updatePElementsPosition(event);
-  });
-}
-
-function updatePElementsPosition(event) {
-  const pElements = document.querySelectorAll(".container p");
-
-  pElements.forEach((pElement, index) => {
-    const mouseX = event.clientX;
-    const mouseY = event.clientY;
-
-    const offset = 10 * (index + 1);
-
-    pElement.style.left = mouseX - offset + "px";
-    pElement.style.top = mouseY - offset + "px";
-  });
-}
-
-function startSimulation() {
-  console.log("TESTE");
-}
-
 // Atom Creation
 function atom() {
   // Outer circle
-  drawCircle(200, 200, 100);
+  circle.drawCircle(200, 200, 100);
   // Inner circle
-  drawCircle2(200, 200, 40);
+  circle.drawCircle2(200, 200, 40);
   // Electrons on top of the circle
   drawElectrons();
   // Electrons on top of the inner circle
@@ -92,7 +87,6 @@ let electrons = {
 
 
 let circle = {
-
   // Drawing the outer circle
   drawCircle(x, y, radius) {
     ctx.beginPath();
@@ -100,7 +94,7 @@ let circle = {
     ctx.strokeStyle = "rgba(255,255,255)";
     ctx.stroke();
   }
-  
+  ,
   // Drawing the inner circle
   drawCircle2(x, y, radius) {
     ctx.beginPath();
