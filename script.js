@@ -89,6 +89,26 @@ let electrons = {
     ctx.fill();
   },
 };
+
+
+let circle = {
+
+  // Drawing the outer circle
+  drawCircle(x, y, radius) {
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.strokeStyle = "rgba(255,255,255)";
+    ctx.stroke();
+  }
+  
+  // Drawing the inner circle
+  drawCircle2(x, y, radius) {
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.strokeStyle = "rgba(255,255,255)";
+    ctx.stroke();
+  }
+}
 // For loop to generate several electrons
 function drawElectrons() {
   for (let i = 0; i < electrons.numElectrons; i++) {
@@ -104,21 +124,6 @@ function drawElectrons2() {
   }
 }
 
-// Drawing the outer circle
-function drawCircle(x, y, radius) {
-  ctx.beginPath();
-  ctx.arc(x, y, radius, 0, 2 * Math.PI);
-  ctx.strokeStyle = "rgba(255,255,255)";
-  ctx.stroke();
-}
-
-// Drawing the inner circle
-function drawCircle2(x, y, radius) {
-  ctx.beginPath();
-  ctx.arc(x, y, radius, 0, 2 * Math.PI);
-  ctx.strokeStyle = "rgba(255,255,255)";
-  ctx.stroke();
-}
 
 function drawProtons() {
   console.log("Protons");
