@@ -1,18 +1,33 @@
-//Menu
+// ... (Your previous code)
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let electronSpeed = 50;
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  atom();
+  requestAnimationFrame(animate);
+}
+
+// Menu initialization
 window.addEventListener("DOMContentLoaded", function () {
-  // Create additional balls dynamically
-  const numBalls = 20; // Adjust the number of balls
+  const numBalls = 20;
   const background = document.querySelector(".background");
 
   for (let i = 0; i < numBalls; i++) {
     const ball = document.createElement("div");
     ball.className = "ball";
     ball.style.top = `${Math.random() * 100}vh`;
-    ball.style.animationDuration = `${Math.random() * 3 + 1}s`; // Adjust animation duration
+    ball.style.animationDuration = `${Math.random() * 3 + 1}s`;
     background.appendChild(ball);
   }
 });
 
+// Start button click event
 const start = document.getElementById("startButton");
 start.addEventListener("click", function () {
   let background = document.querySelector(".background");
@@ -21,7 +36,8 @@ start.addEventListener("click", function () {
     <canvas id="canvas"></canvas>
     <div id="simulation">
       <!--Temperature-->
-      <div id="temperature"><label for="temperatureRangeInput">Temperature:</label>
+      <div id="temperature">
+        <label for="temperatureRangeInput">Temperature:</label>
         <input
           type="range"
           max="100"
@@ -43,63 +59,27 @@ start.addEventListener("click", function () {
     temperatureValueDisplay.textContent = temperatureRangeInput.value;
     if (temperatureRangeInput.value > 50) {
       temperatureLabel.style.color = "orange";
-      temperatureValueDisplay.style.color="orange"
-    }else if(temperatureRangeInput.value < 50){
+      temperatureValueDisplay.style.color = "orange";
+    } else if (temperatureRangeInput.value < 50) {
       temperatureLabel.style.color = "blue";
-      temperatureValueDisplay.style.color="blue"
-    }else{
+      temperatureLabel.style.animation = "shake 0.5s infinite"; // Adjust animation parameters
+      temperatureValueDisplay.style.color = "blue";
+    } else {
       temperatureLabel.style.color = "white";
-      temperatureValueDisplay.style.color="white"
+      temperatureValueDisplay.style.color = "white";
     }
-    
   });
+
+  animate();
 });
-
-
-
-
-//Canvas
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-const W = screen.width,
-  H = screen.height;
-function startSimulation() {
-  const particles = [];
-
-  for (let i = 0; i < 16; i++) {
-    const particle = {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: 15,
-      color: "yellow",
-      speed: Math.random() * 5 + 1,
-      angle: Math.random() * 2 * Math.PI,
-    };
-
-    particles.push(particle);
-  }
-
-  simulationRunning = true;
-  animate(particles);
-}
-
-let animationFrameId;
-let menuCircles = [];
-
-let simulationRunning = false;
-let electronSpeed = 50;
 
 // Atom Creation
 function atom() {
-  // Outer circle
+  // Your drawing code for the atom goes here
   circle.drawCircle(200, 200, 100);
-  // Inner circle
   circle.drawCircle2(200, 200, 40);
-  // Electrons on top of the circle
   drawElectrons();
-  // Electrons on top of the inner circle
   drawElectrons2();
-  // Protons in the middle of the circle
   drawProtons();
 }
 
@@ -130,6 +110,32 @@ let electrons = {
     ctx.fill();
   },
 };
+
+let protons = {
+  color: "red", 
+  D: 20,
+  R: 200, 
+  numProtons:1,
+  ang: 0,
+  draw() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    let posX = 200 + this.R * Math.cos((Math.PI / 180) * this.ang);
+    let posY = 200 + this.R * Math.sin((Math.PI / 180) * this.ang);
+    ctx.arc(posX, posY, this.D / 2, 0, 2 * Math.PI);
+    ctx.fill();
+  },
+
+  drawInner() {
+    ctx.fillStyle = this.color;
+    ctx.beginPath();
+    let posX = 200 + this.R * Math.cos((Math.PI / 240) * this.ang);
+    let posY = 200 + this.R * Math.sin((Math.PI / 180) * this.ang);
+    ctx.arc(posX, posY, this.D / 2, 0, 2 * Math.PI);
+    ctx.fill();
+  },
+};
+
 
 let circle = {
   // Drawing the outer circle
@@ -163,7 +169,10 @@ function drawElectrons2() {
 }
 
 function drawProtons() {
-  console.log("Protons");
+  for (let i = 0; i < protons.numProtons; i++) {
+    protons.drawInner();
+    protons.ang += 360 / protons.numProtons;
+  }
 }
 
-atom();
+
