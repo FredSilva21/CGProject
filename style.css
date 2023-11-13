@@ -7,6 +7,73 @@
   font-size: 16px;
 }
 
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+  z-index: 1; /* Ensure the menu is above the background */
+}
+
+#menuAccess {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 10px;
+  z-index: 2; /* Increased z-index for the menu to be above the background */
+}
+
+#startButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #111;
+  overflow: hidden;
+  z-index: 1; /* Lower z-index to ensure the background is behind the menu */
+}
+
+.ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  animation: moveLeft linear infinite;
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(-100px);
+  }
+}
+
+
+
+
 .container {
   display: flex;
   flex-direction: column;
@@ -37,7 +104,6 @@
 #simulation{
   display: none;
 }
-
 .container p {
   position: absolute; /* Usar position absolute para elementos filho */
   transition: left 0.2s ease, top 0.2s ease; /* Adicione transições */
