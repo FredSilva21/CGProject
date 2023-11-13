@@ -1,4 +1,5 @@
-window.addEventListener("DOMContentLoaded", function () {
+// First entry window
+window.addEventListener("DOMContentLoaded", () => {
   // Create additional balls dynamically
   const numBalls = 20; // Adjust the number of balls
   const background = document.querySelector(".background");
@@ -12,6 +13,19 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Temperature number display
+let temperature = 50;
+
+const temperatureValueDisplay = document.getElementById(
+  "temperatureValueDisplay"
+);
+const temperatureRangeInput = document.getElementById("temperatureRangeInput");
+
+temperatureRangeInput.addEventListener("input", () => {
+  temperature = temperatureRangeInput.value;
+});
+
+// Second entry window
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const W = canvas.width,
