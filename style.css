@@ -30,16 +30,26 @@ body, html {
   color: #fff;
   border-radius: 10px;
   z-index: 2; /* Increased z-index for the menu to be above the background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#menuAccess h1{
+  font-size: 28pt;
+  background-color: transparent;
+  padding: 10px 20px;
+
 }
 
 #startButton {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #4CAF50;
-  color: #fff;
   border: none;
   border-radius: 5px;
+  width: 70%;
 }
 
 .background {
@@ -50,9 +60,11 @@ body, html {
   height: 100vh;
   background-color: #111;
   overflow: hidden;
-  z-index: 1; /* Lower z-index to ensure the background is behind the menu */
+  z-index: 1; /* Lower z-index to ensure the background is behind the menu */;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .ball {
   position: absolute;
   width: 20px;
@@ -67,7 +79,7 @@ body, html {
     transform: translateX(100vw);
   }
   to {
-    transform: translateX(-100px);
+    transform: translateX(-100vw);
   }
 }
 
