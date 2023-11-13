@@ -53,9 +53,11 @@ function atom() {
   // Outer circle
   drawCircle(200, 200, 100);
   // Inner circle
-  drawCircle(200, 200, 40);
+  drawCircle2(200, 200, 40);
   // Electrons on top of the circle
   drawElectrons();
+  // Protons in the middle of the circle
+  drawProtons();
 }
 
 // Object to the creation of the electrons oxygen
@@ -64,6 +66,7 @@ let electrons = {
   D: 20,
   R: 100,
   numElectrons: 6, // Outside electrons
+  numElectronsInside: 2, // Inside electrons
   ang: 0,
 
   draw() {
@@ -80,15 +83,28 @@ function drawElectrons() {
   for (let i = 0; i < electrons.numElectrons; i++) {
     electrons.draw();
     electrons.ang += 360 / electrons.numElectrons;
+    electrons.ang += 360 / electrons.numElectronsInside;
   }
 }
 
-// Drawing the circle
+// Drawing the outer circle
 function drawCircle(x, y, radius) {
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, 2 * Math.PI);
   ctx.strokeStyle = "rgba(255,255,255)";
   ctx.stroke();
+}
+
+// Drawing the inner circle
+function drawCircle2(x, y, radius) {
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, 2 * Math.PI);
+  ctx.strokeStyle = "rgba(255,255,255)";
+  ctx.stroke();
+}
+
+function drawProtons() {
+  console.log("Protons");
 }
 
 atom();
