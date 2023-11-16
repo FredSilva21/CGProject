@@ -67,25 +67,6 @@ canvas {
     width: 100%;
   }
 }
-#menuAccess {
-  text-align: center;
-  padding: 20px;
-  background-color: #333;
-  color: #fff;
-  border-radius: 10px;
-  z-index: 2; /* Increased z-index for the menu to be above the background */
-}
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #111;
-  overflow: hidden;
-  z-index: 1; /* Lower z-index to ensure the background is behind the menu */
-}
 
 .ball {
   position: absolute;
@@ -112,10 +93,6 @@ canvas {
   justify-content: center; /* Centraliza verticalmente */
   width: 800px; /* Largura desejada */
   height: 800px; /* Altura desejada */
-}
-
-#menuAccess {
-  text-align: center;
 }
 
 #menuAccess h1 {
