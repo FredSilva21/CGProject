@@ -23,7 +23,7 @@ start.addEventListener("click", function () {
   document.body.innerHTML = `
     <canvas id="canvas"></canvas>
     <div id="simulation">
-      <div id="temperature"><label for="temperatureRangeInput">Temperature:</label>
+      <div id="temperature"><label for="temperatureLabelInput" id="temperatureLabelInput">Temperature:</label>
         <input
           type="range"
           max="100"
