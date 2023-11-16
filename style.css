@@ -16,6 +16,7 @@ html {
 
 canvas {
   display: none;
+  height: 80%;
 }
 
 .container {

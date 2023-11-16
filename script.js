@@ -18,24 +18,28 @@ let temperature = 50;
 // Start button click event
 const start = document.getElementById("startButton");
 start.addEventListener("click", function () {
-  let background = document.querySelector(".background");
-  background.style.display = "none";
+  let container=document.querySelector(".container")
+  container.display="none"
   document.body.innerHTML = `
-    <canvas id="canvas"></canvas>
+  <div class="container">
+    <canvas id="canvas" width="800" height="800"></canvas>
     <div id="simulation">
-      <div id="temperature"><label for="temperatureLabelInput" id="temperatureLabelInput">Temperature:</label>
-        <input
-          type="range"
-          max="100"
-          min="0"
-          step="1"
-          value="${temperature}"
-          id="temperatureRangeInput"
-        />
-        <span id="temperatureValueDisplay">50</span>
+        <div id="temperature"><label for="temperatureLabelInput" id="temperatureLabelInput">Temperature:</label>
+          <input
+            type="range"
+            max="100"
+            min="0"
+            step="1"
+            value="${temperature}"
+            id="temperatureRangeInput"
+          />
+          <span id="temperatureValueDisplay">50</span>
+        </div>
+        <button type="button" id="restart" disabled>Restart</button>
       </div>
-      <button type="button" id="restart" disabled>Restart</button>
     </div>`;
+    let canvas=document.getElementById("canvas")
+    canvas.display="block"
 
   const temperatureRangeInput = document.getElementById(
     "temperatureRangeInput"
