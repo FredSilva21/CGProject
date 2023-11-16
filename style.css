@@ -134,6 +134,7 @@ button:hover {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+  height: 90%;
 }
 
 #temperatureLabelInput {
