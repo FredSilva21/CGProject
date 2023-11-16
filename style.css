@@ -106,8 +106,12 @@ h1 {
 }
 
 #simulation {
-  display: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 }
+
 .container p {
   position: absolute; /* Usar position absolute para elementos filho */
   transition: left 0.2s ease, top 0.2s ease; /* Adicione transições */
