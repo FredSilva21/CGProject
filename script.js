@@ -57,6 +57,7 @@ let menuCircles = [];
 let simulationRunning = false;
 let electronSpeed = 50;
 
+// Atom Creation
 // Creation of the electron properties
 class Electron {
   constructor(color, D, R, numElectrons, ang) {
@@ -81,7 +82,8 @@ class Electron {
   }
 }
 
-// Circ
+// circle
+//! Revision
 class Circle {
   // Drawing a circle
   draw(x, y, radius) {
