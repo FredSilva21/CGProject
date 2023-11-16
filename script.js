@@ -21,8 +21,8 @@ start.addEventListener("click", function () {
   let container=document.querySelector(".container")
   container.display="none"
   document.body.innerHTML = `
-  <div class="container">
-    <canvas id="canvas" width="800" height="800"></canvas>
+  <div class="secondPage">
+    <canvas id="canvas" width="1000" height="800"></canvas>
     <div id="simulation">
         <div id="temperature"><label for="temperatureLabelInput" id="temperatureLabelInput">Temperature:</label>
           <input

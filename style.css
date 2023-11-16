@@ -16,7 +16,6 @@ html {
 
 canvas {
   display: none;
-  height: 80%;
 }
 
 .container {
@@ -135,13 +134,18 @@ button:hover {
 }
 
 /*Second Entrance*/
+.secondPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 #simulation {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
-  height: 90%;
 }
 
 #temperatureLabelInput {
