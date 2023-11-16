@@ -42,10 +42,8 @@ start.addEventListener("click", function () {
     "temperatureRangeInput"
   );
   const temperatureValueDisplay = document.getElementById(
-    "temperatureValueDisplay"
-  );
-  const temperatureLabel = document.querySelector("#temperature label");
-
+    "temperatureValueDisplay")
+    
   temperatureRangeInput.addEventListener("input", function () {
     // Update the temperature variable when the range input changes
     temperature = parseInt(temperatureRangeInput.value);
