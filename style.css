@@ -14,6 +14,10 @@ html {
   height: 100%;
 }
 
+canvas {
+  display: none;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -24,7 +28,30 @@ html {
   z-index: 1; /* Ensure the menu is above the background */
 }
 
-h1 {
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #111;
+  overflow: hidden;
+  z-index: 1; /* Lower z-index to ensure the background is behind the menu */
+}
+
+#menuAccess {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 10px;
+  z-index: 2; /* Increased z-index for the menu to be above the background */
+}
+
+/*Text Animation*/
+#menuAccess h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
   animation-duration: 3s;
   animation-name: slidein;
 }
@@ -89,13 +116,11 @@ h1 {
 
 #menuAccess {
   text-align: center;
-  z-index: 1;
 }
 
 #menuAccess h1 {
   font-size: 24px;
   margin-bottom: 20px;
-  background-color: transparent;
 }
 
 #startButton {
@@ -105,19 +130,6 @@ h1 {
   color: #fff;
   border: none;
   cursor: pointer;
-}
-
-#simulation {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.container p {
-  position: absolute; /* Usar position absolute para elementos filho */
-  transition: left 0.2s ease, top 0.2s ease; /* Adicione transições */
-  background: transparent;
 }
 
 button {
@@ -150,16 +162,38 @@ button:hover {
   transition-duration: 0.1s;
 }
 
+/*Entrance Animation*/
+.ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  animation: moveLeft linear infinite;
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(-100px);
+  }
+}
+
+/*Second Entrance*/
+
+#simulation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
 @media (min-width: 768px) {
   .button-36 {
     padding: 0 2.6rem;
   }
-}
-
-p {
-  color: #fff;
-  padding: 1rem 1rem;
-  margin: 0.5rem 1rem;
 }
 
 input[type="range"] {
