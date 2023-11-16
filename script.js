@@ -38,23 +38,24 @@ start.addEventListener("click", function () {
       <button type="button" id="restart" disabled>Restart</button>
     </div>`;
 
-  const temperatureRangeInput = document.getElementById("temperatureRangeInput");
-  const temperatureValueDisplay = document.getElementById("temperatureValueDisplay");
+  const temperatureRangeInput = document.getElementById(
+    "temperatureRangeInput"
+  );
+  const temperatureValueDisplay = document.getElementById(
+    "temperatureValueDisplay"
+  );
   const temperatureLabel = document.querySelector("#temperature label");
 
   temperatureRangeInput.addEventListener("input", function () {
     // Update the temperature variable when the range input changes
     temperature = parseInt(temperatureRangeInput.value);
-    
+
     temperatureValueDisplay.textContent = temperature;
     if (temperature > 50) {
-      temperatureLabel.style.color = "orange";
       temperatureValueDisplay.style.color = "orange";
     } else if (temperature < 50) {
-      temperatureLabel.style.color = "blue";
       temperatureValueDisplay.style.color = "blue";
     } else {
-      temperatureLabel.style.color = "white";
       temperatureValueDisplay.style.color = "white";
     }
   });
@@ -201,4 +202,3 @@ function animate() {
 let atom = new Atom(100, 100);
 let atom2 = new Atom(300, 300);
 animate();
-
