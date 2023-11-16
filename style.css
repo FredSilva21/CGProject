@@ -68,24 +68,6 @@ canvas {
   }
 }
 
-.ball {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: #fff;
-  border-radius: 50%;
-  animation: moveLeft linear infinite;
-}
-
-@keyframes moveLeft {
-  from {
-    transform: translateX(100vw);
-  }
-  to {
-    transform: translateX(-100px);
-  }
-}
-
 .container {
   display: flex;
   flex-direction: column;
