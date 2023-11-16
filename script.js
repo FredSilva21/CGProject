@@ -23,8 +23,7 @@ start.addEventListener("click", function () {
   document.body.innerHTML = `
     <canvas id="canvas"></canvas>
     <div id="simulation">
-      <!--Temperature-->
-      <div id="temperature"><label for="temperatureRangeInput">Temperature:</label>
+      <div id="temperature"><label for="temperatureLabelInput" id="temperatureLabelInput">Temperature:</label>
         <input
           type="range"
           max="100"
@@ -42,8 +41,9 @@ start.addEventListener("click", function () {
     "temperatureRangeInput"
   );
   const temperatureValueDisplay = document.getElementById(
-    "temperatureValueDisplay")
-    
+    "temperatureValueDisplay"
+  );
+
   temperatureRangeInput.addEventListener("input", function () {
     // Update the temperature variable when the range input changes
     temperature = parseInt(temperatureRangeInput.value);
