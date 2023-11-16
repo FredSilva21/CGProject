@@ -13,16 +13,51 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Temperature number display
 let temperature = 50;
 
-const temperatureValueDisplay = document.getElementById(
-  "temperatureValueDisplay"
-);
-const temperatureRangeInput = document.getElementById("temperatureRangeInput");
+// Start button click event
+const start = document.getElementById("startButton");
+start.addEventListener("click", function () {
+  let background = document.querySelector(".background");
+  background.style.display = "none";
+  document.body.innerHTML = `
+    <canvas id="canvas"></canvas>
+    <div id="simulation">
+      <!--Temperature-->
+      <div id="temperature"><label for="temperatureRangeInput">Temperature:</label>
+        <input
+          type="range"
+          max="100"
+          min="0"
+          step="1"
+          value="${temperature}"
+          id="temperatureRangeInput"
+        />
+        <span id="temperatureValueDisplay">50</span>
+      </div>
+      <button type="button" id="restart" disabled>Restart</button>
+    </div>`;
 
-temperatureRangeInput.addEventListener("input", () => {
-  temperature = temperatureRangeInput.value;
+  const temperatureRangeInput = document.getElementById("temperatureRangeInput");
+  const temperatureValueDisplay = document.getElementById("temperatureValueDisplay");
+  const temperatureLabel = document.querySelector("#temperature label");
+
+  temperatureRangeInput.addEventListener("input", function () {
+    // Update the temperature variable when the range input changes
+    temperature = parseInt(temperatureRangeInput.value);
+    
+    temperatureValueDisplay.textContent = temperature;
+    if (temperature > 50) {
+      temperatureLabel.style.color = "orange";
+      temperatureValueDisplay.style.color = "orange";
+    } else if (temperature < 50) {
+      temperatureLabel.style.color = "blue";
+      temperatureValueDisplay.style.color = "blue";
+    } else {
+      temperatureLabel.style.color = "white";
+      temperatureValueDisplay.style.color = "white";
+    }
+  });
 });
 
 // Second entry window
