@@ -14,8 +14,11 @@ html {
   height: 100%;
 }
 
-canvas {
+#canvas {
   display: none;
+  border: 2px solid #000;
+  z-index: 1;
+  margin-top: 10px;
 }
 
 .container {
@@ -146,6 +149,7 @@ button:hover {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
+  padding: 10px 10px
 }
 
 #temperatureLabelInput {
