@@ -22,7 +22,7 @@ start.addEventListener("click", function () {
   container.display = "none";
   document.body.innerHTML = `
   <div class="secondPage">
-    <canvas id="canvas" width="1200" height="600"></canvas>
+    <canvas id="canvas" width="1300" height="650"></canvas>
     <div id="simulation">
         <div id="temperature"><label for="temperatureRangeInput" id="temperatureLabelInput">Temperature:</label>
           <input
@@ -61,9 +61,7 @@ start.addEventListener("click", function () {
   });
 
   let restart = document.getElementById("restart");
-  restart.addEventListener("click", function () {
-    ;
-  });
+  restart.addEventListener("click", function () {});
   //Second Page
   let canvas = document.getElementById("canvas");
   canvas.style.display = "block";
@@ -115,7 +113,7 @@ start.addEventListener("click", function () {
       ctx.fill();
     }
 
-    updatePosition(temperature){
+    updatePosition(temperature) {
       const vibrationSpeed = 0.5 * (temperature / 50);
       this.ang += vibrationSpeed;
       this.R += Math.sin(this.ang) * 4;
@@ -144,6 +142,8 @@ start.addEventListener("click", function () {
     constructor(x, y) {
       this.x = x;
       this.y = y;
+      this.vx = Math.floor(Math.random() * 3 + 1);
+      this.vy = Math.floor(Math.random() * 3 + 1);
       this.angle = 0;
       this.radius = 100;
       this.circle = new Circle();
@@ -177,8 +177,8 @@ start.addEventListener("click", function () {
     drawElectrons(electron, numElectrons) {
       for (let i = 0; i < numElectrons; i++) {
         electron.draw(
-         this.x + electron.R * Math.cos((Math.PI / 180) * electron.ang),
-         this.y + electron.R * Math.sin((Math.PI / 180) * electron.ang)
+          this.x + electron.R * Math.cos((Math.PI / 180) * electron.ang),
+          this.y + electron.R * Math.sin((Math.PI / 180) * electron.ang)
         );
         electron.ang += 360 / numElectrons;
       }
@@ -193,29 +193,83 @@ start.addEventListener("click", function () {
       this.circle.updatePosition();
       this.electrons.updatePosition(temperature);
       this.innerElectrons.updatePosition(temperature);
-      this.neutrons.updatePosition(temperature)
+      this.neutrons.updatePosition(temperature);
+
+      this.angle += 0.2;
+      this.R += Math.sin(this.angle) * 4;
+    }
+
+    moveRandomly() {
+      this.x += this.vx;
+      this.y += this.vy;
+    
+      if (this.x + this.radius > W) {
+        this.x = W - this.radius;
+        this.vx *= -1;
+      } else if (this.x - this.radius < 0) {
+        this.x = this.radius;
+        this.vx *= -1;
+      }
+    
+      if (this.y + this.radius > H) {
+        this.y = H - this.radius;
+        this.vy *= -1;
+      } else if (this.y - this.radius < 0) {
+        this.y = this.radius;
+        this.vy *= -1;
+      }
     }
   }
 
   // Activating circular movement
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath()
+    ctx.beginPath();
     atom.updatePosition();
     atom.draw();
+    atom.moveRandomly();
     ctx.closePath();
 
-    ctx.beginPath()
-    atom2.updatePosition()
+    ctx.beginPath();
+    atom2.updatePosition();
     atom2.draw();
+    atom2.moveRandomly();
+    ctx.closePath();
+
+    ctx.beginPath();
+    atom3.updatePosition();
+    atom3.draw();
+    atom3.moveRandomly();
+    ctx.closePath();
+
+    ctx.beginPath();
+    atom4.updatePosition();
+    atom4.draw();
+    atom4.moveRandomly();
+    ctx.closePath();
+
+    ctx.beginPath();
+    atom5.updatePosition();
+    atom5.draw();
+    atom5.moveRandomly();
     ctx.closePath();
     
+    ctx.beginPath();
+    atom6.updatePosition();
+    atom6.draw();
+    atom6.moveRandomly();
+    ctx.closePath();
+
     requestAnimationFrame(animate);
   }
 
   // Initiating the Start of the animation and the atoms
-  let atom = new Atom(700, 300);
-  let atom2 = new Atom(300, 300);
+  let atom = new Atom(Math.random() * W, Math.random() * H);
+  let atom2 = new Atom(Math.random() * W, Math.random() * H);
+  let atom3 = new Atom(Math.random() * W, Math.random() * H);
+  let atom4 = new Atom(Math.random() * W, Math.random() * H);
+  let atom5 = new Atom(Math.random() * W, Math.random() * H);
+  let atom6 = new Atom(Math.random() * W, Math.random() * H);
 
-  animate(atom);
+  animate();
 });
