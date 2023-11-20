@@ -7,13 +7,35 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <canvas id="canvas" width="1000" height="800"></canvas>
+    <!-- First Window -->
     <div class="container" width="800" height="800">
       <div class="background">
         <div id="menuAccess">
           <h1>Welcome to the Atoms Simulation</h1>
           <button type="button" id="startButton">Start</button>
         </div>
+      </div>
+    </div>
+
+    <!-- Second Window - Canvas-->
+    <div class="secondPage">
+      <canvas id="canvas" width="1300" height="650" style></canvas>
+      <div id="simulation">
+        <div id="temperature">
+          <label for="temperatureRangeInput" id="temperatureLabelInput"
+            >Temperature:</label
+          >
+          <input
+            type="range"
+            max="100"
+            min="0"
+            step="1"
+            value="50"
+            id="temperatureRangeInput"
+          />
+          <span id="temperatureValueDisplay">50</span>
+        </div>
+        <button type="button" id="restart">Restart</button>
       </div>
     </div>
     <script src="script.js"></script>
