@@ -14,6 +14,13 @@ html {
   height: 100%;
 }
 
+#canvas {
+  display: none;
+  border: 4px solid white;
+  z-index: 1;
+  margin-top: 10px;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -24,9 +31,38 @@ html {
   z-index: 1; /* Ensure the menu is above the background */
 }
 
-h1 {
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #111;
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Lower z-index to ensure the background is behind the menu */
+}
+
+#menuAccess {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 10px;
+  z-index: 2; /* Increased z-index for the menu to be above the background */
+}
+
+/*Text Animation*/
+#menuAccess h1 {
+  font-size: 30px;
+  margin-bottom: 20px;
   animation-duration: 3s;
   animation-name: slidein;
+  background-color: transparent;
 }
 
 @keyframes slidein {
@@ -40,69 +76,15 @@ h1 {
     width: 100%;
   }
 }
-#menuAccess {
-  text-align: center;
-  padding: 20px;
-  background-color: #333;
+
+#startButton {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #0074d9;
   color: #fff;
-  border-radius: 10px;
-  z-index: 2; /* Increased z-index for the menu to be above the background */
-}
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #111;
-  overflow: hidden;
-  z-index: 1; /* Lower z-index to ensure the background is behind the menu */
-}
-
-.ball {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: #fff;
-  border-radius: 50%;
-  animation: moveLeft linear infinite;
-}
-
-@keyframes moveLeft {
-  from {
-    transform: translateX(100vw);
-  }
-  to {
-    transform: translateX(-100px);
-  }
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente */
-  justify-content: center; /* Centraliza verticalmente */
-  width: 800px; /* Largura desejada */
-  height: 800px; /* Altura desejada */
-}
-
-#menuAccess {
-  text-align: center;
-}
-
-#menuAccess h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-#simulation {
-  display: none;
-}
-.container p {
-  position: absolute; /* Usar position absolute para elementos filho */
-  transition: left 0.2s ease, top 0.2s ease; /* Adicione transições */
-  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 60%;
 }
 
 button {
@@ -130,21 +112,57 @@ button {
   touch-action: manipulation;
 }
 
-button::after, button:hover {
+button:hover {
   box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
   transition-duration: 0.1s;
+}
+
+/*Entrance Animation*/
+.ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  animation: moveLeft linear infinite;
+}
+
+@keyframes moveLeft {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(-100vw);
+  }
+}
+
+/*Second Entrance*/
+.secondPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#simulation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px 10px;
+  width: 80%;
+}
+
+#temperatureLabelInput {
+  font-size: 24px;
+  color: #fff;
+  padding: 1rem;
 }
 
 @media (min-width: 768px) {
   .button-36 {
     padding: 0 2.6rem;
   }
-}
-
-p {
-  color: #fff;
-  padding: 1rem 1rem;
-  margin: 0.5rem 1rem;
 }
 
 input[type="range"] {
