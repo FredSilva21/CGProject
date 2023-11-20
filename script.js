@@ -171,6 +171,9 @@ start.addEventListener("click", function () {
   secondPage.style.display = "block";
   let container = document.querySelector(".container");
   container.style.display = "none";
+  canvas.style.display = "block";
+  canvas.width = 1300;
+  canvas.height = 650;
   // const temperatureRangeInput = document.getElementById(
   //   "temperatureRangeInput"
   // );
@@ -197,9 +200,6 @@ restart.addEventListener("click", function () {
   secondPage.style.display = "none";
   let container = document.querySelector(".container");
   container.style.display = "block";
-  canvas.style.display = "block";
-  canvas.width = 1300;
-  canvas.height = 650;
 });
 
 let animationFrameId;
