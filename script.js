@@ -13,156 +13,263 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Temperature number display
 let temperature = 50;
 
-const temperatureValueDisplay = document.getElementById(
-  "temperatureValueDisplay"
-);
-const temperatureRangeInput = document.getElementById("temperatureRangeInput");
+// Start button click event
+const start = document.getElementById("startButton");
+start.addEventListener("click", function () {
+  let container = document.querySelector(".container");
+  container.display = "none";
+  document.body.innerHTML = `
+  <div class="secondPage">
+    <canvas id="canvas" width="1300" height="650"></canvas>
+    <div id="simulation">
+        <div id="temperature"><label for="temperatureRangeInput" id="temperatureLabelInput">Temperature:</label>
+          <input
+            type="range"
+            max="100"
+            min="0"
+            step="1"
+            value="${temperature}"
+            id="temperatureRangeInput"
+          />
+          <span id="temperatureValueDisplay">50</span>
+        </div>
+        <button type="button" id="restart">Restart</button>
+      </div>
+    </div>`;
 
-temperatureRangeInput.addEventListener("input", () => {
-  temperature = temperatureRangeInput.value;
-});
+  const temperatureRangeInput = document.getElementById(
+    "temperatureRangeInput"
+  );
+  const temperatureValueDisplay = document.getElementById(
+    "temperatureValueDisplay"
+  );
 
-// Second entry window
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
-const W = canvas.width,
-  H = canvas.height;
+  temperatureRangeInput.addEventListener("input", function () {
+    // Update the temperature variable when the range input changes
+    temperature = parseInt(temperatureRangeInput.value);
 
-function startSimulation() {
-  const particles = [];
+    temperatureValueDisplay.textContent = temperature;
+    if (temperature > 50) {
+      temperatureValueDisplay.style.color = "orange";
+    } else if (temperature < 50) {
+      temperatureValueDisplay.style.color = "blue";
+    } else {
+      temperatureValueDisplay.style.color = "white";
+    }
+  });
 
-  for (let i = 0; i < 16; i++) {
-    const particle = {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      radius: 15,
-      color: "yellow",
-      speed: Math.random() * 5 + 1,
-      angle: Math.random() * 2 * Math.PI,
-    };
+  let restart = document.getElementById("restart");
+  restart.addEventListener("click", function () {});
+  //Second Page
+  let canvas = document.getElementById("canvas");
+  canvas.style.display = "block";
 
-    particles.push(particle);
-  }
+  let ctx = canvas.getContext("2d");
+  const W = canvas.width,
+    H = canvas.height;
 
-  simulationRunning = true;
-  animate(particles);
-}
+  let animationFrameId;
+  let electronSpeed = 50;
 
-let animationFrameId;
-let menuCircles = [];
+  // Atom Creation
+  // Creation of the electron properties
+  class Electron {
+    constructor(color, D, R, ang) {
+      this.color = color;
+      this.D = D;
+      this.R = R;
+      this.ang = ang;
+    }
 
-let simulationRunning = false;
-let electronSpeed = 50;
+    draw(posX, posY) {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(posX, posY, this.D / 2, 0, 2 * Math.PI);
+      ctx.fill();
+    }
 
-// Atom Creation
-// Creation of the electron properties
-class Electron {
-  constructor(color, D, R, numElectrons, ang) {
-    this.color = color;
-    this.D = D;
-    this.R = R;
-    this.numElectrons = numElectrons;
-    this.ang = ang;
-  }
-
-  draw(posX, posY) {
-    ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(posX, posY, this.D / 2, 0, 2 * Math.PI);
-    ctx.fill();
-  }
-
-  // Movement
-  updatePosition() {
-    this.ang += 0.2;
-    this.R += Math.sin(this.ang) * 4;
-  }
-}
-
-// circle
-//! Revision
-class Circle {
-  // Drawing a circle
-  draw(x, y, radius) {
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI);
-    ctx.strokeStyle = "rgba(255,255,255)";
-    ctx.stroke();
-  }
-
-  updatePosition() {
-    this.ang += 0.2;
-    this.R += Math.sin(this.ang) * 4;
-  }
-}
-
-// Atom: Inner and outer circle and electrons
-class Atom {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.angle = 0;
-    this.radius = 100;
-    this.circle = new Circle();
-    this.electrons = new Electron("blue", 20, 100, 6, 0);
-    this.innerElectrons = new Electron("blue", 20, 40, 2, 0);
-  }
-
-  // Draws the atom
-  draw() {
-    // Outer circle
-    this.circle.draw(200, 200, 100);
-    // Inner circle
-    this.circle.draw(200, 200, 40);
-    // Electrons on top of the circle
-    this.drawElectrons(this.electrons, 6);
-    // Electrons on top of the inner circle
-    this.drawElectrons(this.innerElectrons, 2);
-    // Protons in the middle of the circle
-    // this.drawProtons();
-    // this.circle.drawCircle(this.x, this.y, 100);
-    // this.circle.drawCircle(this.x, this.y, 40);
-    // this.electrons.draw();
-    // this.innerElectrons.drawInner();
-  }
-
-  // draws the electrons
-  drawElectrons(electron, numElectrons) {
-    for (let i = 0; i < numElectrons; i++) {
-      electron.draw(
-        200 + electron.R * Math.cos((Math.PI / 180) * electron.ang),
-        200 + electron.R * Math.sin((Math.PI / 180) * electron.ang)
-      );
-      electron.ang += 360 / numElectrons;
+    // Movement
+    updatePosition(temperature) {
+      const vibrationSpeed = 0.5 * (temperature / 50);
+      this.ang += vibrationSpeed;
+      this.R += Math.sin(this.ang) * 4;
     }
   }
 
-  // updates the position
-  updatePosition() {
-    this.circle.updatePosition();
-    this.electrons.updatePosition(this.x, this.y);
-    this.innerElectrons.updatePosition(this.x, this.y);
+  class Neutron {
+    constructor(color, D, R, ang) {
+      this.color = color;
+      this.D = D;
+      this.R = R;
+      this.ang = ang;
+    }
+
+    draw(posX, posY) {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(posX, posY, this.D / 2, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+
+    updatePosition(temperature) {
+      const vibrationSpeed = 0.5 * (temperature / 50);
+      this.ang += vibrationSpeed;
+      this.R += Math.sin(this.ang) * 4;
+    }
   }
 
-  // drawProtons() {
-  //   console.log("Protons");
-  // }
-}
+  // circle
+  //! Revision
+  class Circle {
+    // Drawing a circle
+    draw(x, y, radius) {
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, 2 * Math.PI);
+      ctx.strokeStyle = "rgba(255,255,255)";
+      ctx.stroke();
+    }
 
-// Activating circular movement
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  atom.updatePosition();
-  atom2.updatePosition();
-  atom.draw();
-  atom2.draw();
-  requestAnimationFrame(animate);
-}
+    updatePosition() {
+      this.ang += 0.2;
+      this.R += Math.sin(this.ang) * 4;
+    }
+  }
 
-// Initiating the Start of the animation and the atoms
-let atom = new Atom(100, 100);
-let atom2 = new Atom(300, 300);
-animate();
+  // Atom: Inner and outer circle and electrons
+  class Atom {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      this.vx = Math.floor(Math.random() * 3 + 1);
+      this.vy = Math.floor(Math.random() * 3 + 1);
+      this.angle = 0;
+      this.radius = 100;
+      this.circle = new Circle();
+      this.electrons = new Electron("blue", 20, 100, 0);
+      this.innerElectrons = new Electron("blue", 20, 40, 0);
+      this.neutrons = new Neutron("gray", 20, 0, 0);
+    }
+
+    // Draws the atom
+    draw() {
+      // Outer circle
+      this.circle.draw(this.x, this.y, 100);
+      // Inner circle
+      this.circle.draw(this.x, this.y, 40);
+      // Electrons on top of the circle
+      this.drawElectrons(this.electrons, 6);
+      // Electrons on top of the inner circle
+      this.drawElectrons(this.innerElectrons, 2);
+      // Neutron
+      this.drawNeutron(this.neutrons, this.x, this.y);
+
+      // Protons in the middle of the circle
+      // this.drawProtons();
+      // this.circle.drawCircle(this.x, this.y, 100);
+      // this.circle.drawCircle(this.x, this.y, 40);
+      // this.electrons.draw();
+      // this.innerElectrons.drawInner();
+    }
+
+    // draws the electrons
+    drawElectrons(electron, numElectrons) {
+      for (let i = 0; i < numElectrons; i++) {
+        electron.draw(
+          this.x + electron.R * Math.cos((Math.PI / 180) * electron.ang),
+          this.y + electron.R * Math.sin((Math.PI / 180) * electron.ang)
+        );
+        electron.ang += 360 / numElectrons;
+      }
+    }
+
+    drawNeutron(neutrons, centerX, centerY) {
+      neutrons.draw(centerX, centerY);
+    }
+
+    // updates the position
+    updatePosition() {
+      this.circle.updatePosition();
+      this.electrons.updatePosition(temperature);
+      this.innerElectrons.updatePosition(temperature);
+      this.neutrons.updatePosition(temperature);
+
+      this.angle += 0.2;
+      this.R += Math.sin(this.angle) * 4;
+    }
+
+    moveRandomly() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.x + this.radius > W) {
+        this.x = W - this.radius;
+        this.vx *= -1;
+      } else if (this.x - this.radius < 0) {
+        this.x = this.radius;
+        this.vx *= -1;
+      }
+
+      if (this.y + this.radius > H) {
+        this.y = H - this.radius;
+        this.vy *= -1;
+      } else if (this.y - this.radius < 0) {
+        this.y = this.radius;
+        this.vy *= -1;
+      }
+    }
+  }
+
+  // Activating circular movement
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    atom.updatePosition();
+    atom.draw();
+    atom.moveRandomly();
+    ctx.closePath();
+
+    ctx.beginPath();
+    atom2.updatePosition();
+    atom2.draw();
+    atom2.moveRandomly();
+    ctx.closePath();
+
+    ctx.beginPath();
+    atom3.updatePosition();
+    atom3.draw();
+    atom3.moveRandomly();
+    ctx.closePath();
+
+    ctx.beginPath();
+    atom4.updatePosition();
+    atom4.draw();
+    atom4.moveRandomly();
+    ctx.closePath();
+
+    ctx.beginPath();
+    atom5.updatePosition();
+    atom5.draw();
+    atom5.moveRandomly();
+    ctx.closePath();
+
+    ctx.beginPath();
+    atom6.updatePosition();
+    atom6.draw();
+    atom6.moveRandomly();
+    ctx.closePath();
+
+    requestAnimationFrame(animate);
+  }
+
+  // Initiating the Start of the animation and the atoms
+  let atom = new Atom(Math.random() * W, Math.random() * H);
+  let atom2 = new Atom(Math.random() * W, Math.random() * H);
+  let atom3 = new Atom(Math.random() * W, Math.random() * H);
+  let atom4 = new Atom(Math.random() * W, Math.random() * H);
+  let atom5 = new Atom(Math.random() * W, Math.random() * H);
+  let atom6 = new Atom(Math.random() * W, Math.random() * H);
+
+  animate();
+});
