@@ -174,32 +174,32 @@ start.addEventListener("click", function () {
   canvas.style.display = "block";
   canvas.width = 1300;
   canvas.height = 650;
-  // const temperatureRangeInput = document.getElementById(
-  //   "temperatureRangeInput"
-  // );
-  // const temperatureValueDisplay = document.getElementById(
-  //   "temperatureValueDisplay"
-  // );
-
-  // temperatureRangeInput.addEventListener("input", function () {
-  //   // Update the temperature variable when the range input changes
-  //   temperature = parseInt(temperatureRangeInput.value);
-
-  //   temperatureValueDisplay.textContent = temperature;
-  //   if (temperature > 50) {
-  //     temperatureValueDisplay.style.color = "orange";
-  //   } else if (temperature < 50) {
-  //     temperatureValueDisplay.style.color = "blue";
-  //   } else {
-  //     temperatureValueDisplay.style.color = "white";
-  //   }
-  // });
 });
 
 restart.addEventListener("click", function () {
   secondPage.style.display = "none";
   let container = document.querySelector(".container");
   container.style.display = "block";
+});
+
+// Temperature control
+const temperatureRangeInput = document.getElementById("temperatureRangeInput");
+const temperatureValueDisplay = document.getElementById(
+  "temperatureValueDisplay"
+);
+
+temperatureRangeInput.addEventListener("input", function () {
+  // Update the temperature variable when the range input changes
+  temperature = parseInt(temperatureRangeInput.value);
+
+  temperatureValueDisplay.textContent = temperature;
+  if (temperature > 50) {
+    temperatureValueDisplay.style.color = "orange";
+  } else if (temperature < 50) {
+    temperatureValueDisplay.style.color = "blue";
+  } else {
+    temperatureValueDisplay.style.color = "white";
+  }
 });
 
 let animationFrameId;
