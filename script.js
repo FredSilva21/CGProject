@@ -207,9 +207,14 @@ let electronSpeed = 50;
 // Initiating the Start of the animation and the atoms
 let atoms = [];
 
-// 
+//
 for (let i = 0; i < 6; i++) {
-  atoms.push(new Atom(Math.random() * W, Math.random() * H));
+  let newAtom;
+  do {
+    newAtom = new Atom(Math.random() * W, Math.random() * H);
+  } while (checkOverlap(newAtom, atoms));
+
+  atoms.push(newAtom);
 }
 
 // Entry animation
@@ -224,6 +229,24 @@ function movingBalls() {
     ball.style.animationDuration = `${Math.random() * 3 + 1}s`; // Adjust animation duration
     background.appendChild(ball);
   }
+}
+
+// Check for atoms appearing on top of each other
+function checkOverlap(newAtom, existingAtoms) {
+  for (let i = 0; i < existingAtoms.length; i++) {
+    const distance = calculateDistance(
+      newAtom.x,
+      newAtom.y,
+      existingAtoms[i].x,
+      existingAtoms[i].y
+    );
+    const minDistance = newAtom.radius + existingAtoms[i].radius;
+
+    if (distance < minDistance) {
+      return true; // Overlaps with an existing atom
+    }
+  }
+  return false; // No overlap
 }
 
 // Calculate distance
