@@ -46,7 +46,6 @@ class Neutron {
 }
 
 // circle
-//! Revision
 class Circle {
   // Drawing a circle
   draw(x, y, radius) {
@@ -208,6 +207,7 @@ let electronSpeed = 50;
 // Initiating the Start of the animation and the atoms
 let atoms = [];
 
+// 
 for (let i = 0; i < 6; i++) {
   atoms.push(new Atom(Math.random() * W, Math.random() * H));
 }
@@ -226,6 +226,21 @@ function movingBalls() {
   }
 }
 
+// Calculate distance
+function calculateDistance(x1, y1, x2, y2) {
+  return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+}
+
+// Function to check colliding circles
+function checkCollision(atom1, atom2) {
+  const dx = atom2.x - atom1.x;
+  const dy = atom2.y - atom1.y;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+  // const distance = calculateDistance(atom1.x, atom1.y, atom2.x, atom2.y);
+  // const minDistance = atom1.radius + atom2.radius;
+  return distance <= atom1.radius + atom2.radius;
+}
+
 // Activating circular movement
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -235,10 +250,25 @@ function animate() {
     atoms[i].updatePosition();
     atoms[i].draw();
     atoms[i].moveRandomly();
+
+    // Loop to check collisions
+    for (let j = i + 1; j < atoms.length; j++) {
+      if (checkCollision(atoms[i], atoms[j])) {
+        // Handle the collision movement
+        const tempVx = atoms[i].vx;
+        const tempVy = atoms[i].vy;
+
+        atoms[i].vx = atoms[j].vx;
+        atoms[i].vy = atoms[j].vy;
+
+        atoms[j].vx = tempVx;
+        atoms[j].vy = tempVy;
+      }
+    }
+
     ctx.closePath();
   }
 
   requestAnimationFrame(animate);
 }
-
 animate();
