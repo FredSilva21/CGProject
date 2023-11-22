@@ -258,10 +258,9 @@ function calculateDistance(x1, y1, x2, y2) {
 function checkCollision(atom1, atom2) {
   const dx = atom2.x - atom1.x;
   const dy = atom2.y - atom1.y;
-  const distance = Math.sqrt(dx * dx + dy * dy);
-  // const distance = calculateDistance(atom1.x, atom1.y, atom2.x, atom2.y);
-  // const minDistance = atom1.radius + atom2.radius;
-  return distance <= atom1.radius + atom2.radius;
+  const dz = dx * dx + dy * dy;
+  const distance = atom2.radius + atom2.radius;
+  return distance * distance >= dz;
 }
 
 // Activating circular movement
