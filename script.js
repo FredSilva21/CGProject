@@ -88,13 +88,6 @@ class Atom {
     this.drawElectrons(this.innerElectrons, 2);
     // Neutron
     this.drawNeutron(this.neutrons, this.x, this.y);
-
-    // Protons in the middle of the circle
-    // this.drawProtons();
-    // this.circle.drawCircle(this.x, this.y, 100);
-    // this.circle.drawCircle(this.x, this.y, 40);
-    // this.electrons.draw();
-    // this.innerElectrons.drawInner();
   }
 
   // draws the electrons
