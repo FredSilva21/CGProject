@@ -242,7 +242,7 @@ function checkOverlap(newAtom, existingAtoms) {
     );
     const minDistance = newAtom.radius + existingAtoms[i].radius;
 
-    if (distance < minDistance) {
+    if (distance <= minDistance) {
       return true; // Overlaps with an existing atom
     }
   }
