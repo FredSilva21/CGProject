@@ -166,16 +166,14 @@ secondPage.style.display = "none";
 const start = document.getElementById("startButton");
 let restart = document.getElementById("restart");
 
-start.addEventListener("click", function () {
+start.addEventListener("click", () => {
   secondPage.style.display = "block";
   let container = document.querySelector(".container");
   container.style.display = "none";
   canvas.style.display = "block";
-  // canvas.width = 1900;
-  // canvas.height = 650;
 });
 
-restart.addEventListener("click", function () {
+restart.addEventListener("click", () => {
   secondPage.style.display = "none";
   let container = document.querySelector(".container");
   container.style.display = "block";
