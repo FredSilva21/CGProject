@@ -116,7 +116,7 @@ class Atom {
   updatePosition() {
     this.circle.updatePosition();
     this.electrons.updatePosition(temperature);
-    this.innerElectrons.updatePosition(temperature);
+    this.innerElectrons.updatePosition(temperature * 4);
     this.neutrons.updatePosition(temperature);
 
     this.angle += 0.2;
@@ -171,8 +171,8 @@ start.addEventListener("click", function () {
   let container = document.querySelector(".container");
   container.style.display = "none";
   canvas.style.display = "block";
-  canvas.width = 1300;
-  canvas.height = 650;
+  // canvas.width = 1900;
+  // canvas.height = 650;
 });
 
 restart.addEventListener("click", function () {
