@@ -115,8 +115,8 @@ class Atom {
   // updates the position
   updatePosition() {
     this.circle.updatePosition();
-    this.electrons.updatePosition(temperature);
-    this.innerElectrons.updatePosition(temperature * 4);
+    this.electrons.updatePosition(temperature * 2);
+    this.innerElectrons.updatePosition(temperature * 6);
     this.neutrons.updatePosition(temperature);
 
     this.angle += 0.2;
@@ -218,13 +218,13 @@ for (let i = 0; i < 6; i++) {
 // Entry animation
 function movingBalls() {
   // Create additional balls dynamically
-  const numBalls = 20; // Adjust the number of balls
+  const numBalls = 30; // Adjust the number of balls
   const background = document.querySelector(".background");
   for (let i = 0; i < numBalls; i++) {
     const ball = document.createElement("div");
     ball.className = "ball";
     ball.style.top = `${Math.random() * 100}vh`;
-    ball.style.animationDuration = `${Math.random() * 3 + 1}s`; // Adjust animation duration
+    ball.style.animationDuration = `${Math.random() * 4 + 1}s`; // Adjust animation duration
     background.appendChild(ball);
   }
 }
