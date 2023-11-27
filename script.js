@@ -186,12 +186,14 @@ const temperatureValueDisplay = document.getElementById(
 temperatureRangeInput.addEventListener("input", function () {
   // Update the temperature variable when the range input changes
   temperature = parseInt(temperatureRangeInput.value);
-
+  const animationDuration = 0.5 / (temperature / 50);
   temperatureValueDisplay.textContent = temperature;
   if (temperature > 50) {
     temperatureValueDisplay.style.color = "orange";
+    restart.style.animation = `shake ${animationDuration}s infinite`;
   } else if (temperature < 50) {
     temperatureValueDisplay.style.color = "blue";
+    restart.style.animation = "";
   } else {
     temperatureValueDisplay.style.color = "white";
   }
