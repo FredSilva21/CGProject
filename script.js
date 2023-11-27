@@ -45,12 +45,17 @@ class Neutron {
   }
 }
 
-// circle
+// Circle Ellipse
 class Circle {
   // Drawing a circle
   draw(x, y, radius) {
     ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.ellipse(x, y, 30, 100, Math.PI / 2, 0, 2 * Math.PI); // center
+
+    ctx.ellipse(x, y, 30, 120, Math.PI / 4, 0, 2 * Math.PI); // right
+
+    ctx.ellipse(x, y, 120, 30, Math.PI / 4, 0, 2 * Math.PI); // left
+
     ctx.strokeStyle = "rgba(255,255,255)";
     ctx.stroke();
   }
@@ -71,7 +76,7 @@ class Atom {
     this.angle = 0;
     this.radius = 100;
     this.circle = new Circle();
-    this.electrons = new Electron("blue", 20, 100, 0);
+    this.electrons = new Electron("blue", 20, 100, 150, 0);
     this.innerElectrons = new Electron("blue", 20, 40, 0);
     this.neutrons = new Neutron("gray", 20, 0, 0);
   }
@@ -88,20 +93,13 @@ class Atom {
     this.drawElectrons(this.innerElectrons, 2);
     // Neutron
     this.drawNeutron(this.neutrons, this.x, this.y);
-
-    // Protons in the middle of the circle
-    // this.drawProtons();
-    // this.circle.drawCircle(this.x, this.y, 100);
-    // this.circle.drawCircle(this.x, this.y, 40);
-    // this.electrons.draw();
-    // this.innerElectrons.drawInner();
   }
 
   // draws the electrons
   drawElectrons(electron, numElectrons) {
     for (let i = 0; i < numElectrons; i++) {
       electron.draw(
-        this.x + electron.R * Math.cos((Math.PI / 180) * electron.ang),
+        this.x + electron.R * Math.cos((Math.PI / 360) * electron.ang),
         this.y + electron.R * Math.sin((Math.PI / 180) * electron.ang)
       );
       electron.ang += 360 / numElectrons;
@@ -115,8 +113,8 @@ class Atom {
   // updates the position
   updatePosition() {
     this.circle.updatePosition();
-    this.electrons.updatePosition(temperature);
-    this.innerElectrons.updatePosition(temperature);
+    this.electrons.updatePosition(temperature * 2);
+    this.innerElectrons.updatePosition(temperature * 6);
     this.neutrons.updatePosition(temperature);
 
     this.angle += 0.2;
@@ -164,18 +162,16 @@ secondPage.style.display = "none";
 
 // Start and Restart button click event
 const start = document.getElementById("startButton");
-const restart = document.getElementById("restart");
+let restart = document.getElementById("restart");
 
-start.addEventListener("click", function () {
+start.addEventListener("click", () => {
   secondPage.style.display = "block";
   let container = document.querySelector(".container");
   container.style.display = "none";
   canvas.style.display = "block";
-  canvas.width = 1300;
-  canvas.height = 650;
 });
 
-restart.addEventListener("click", function () {
+restart.addEventListener("click", () => {
   secondPage.style.display = "none";
   let container = document.querySelector(".container");
   container.style.display = "block";
@@ -190,14 +186,12 @@ const temperatureValueDisplay = document.getElementById(
 temperatureRangeInput.addEventListener("input", function () {
   // Update the temperature variable when the range input changes
   temperature = parseInt(temperatureRangeInput.value);
-  const animationDuration = 0.5 / (temperature / 50);
+
   temperatureValueDisplay.textContent = temperature;
   if (temperature > 50) {
     temperatureValueDisplay.style.color = "orange";
-    restart.style.animation = `shake ${animationDuration}s infinite`;
   } else if (temperature < 50) {
     temperatureValueDisplay.style.color = "blue";
-    restart.style.animation = "";
   } else {
     temperatureValueDisplay.style.color = "white";
   }
@@ -222,13 +216,13 @@ for (let i = 0; i < 6; i++) {
 // Entry animation
 function movingBalls() {
   // Create additional balls dynamically
-  const numBalls = 20; // Adjust the number of balls
+  const numBalls = 30; // Adjust the number of balls
   const background = document.querySelector(".background");
   for (let i = 0; i < numBalls; i++) {
     const ball = document.createElement("div");
     ball.className = "ball";
     ball.style.top = `${Math.random() * 100}vh`;
-    ball.style.animationDuration = `${Math.random() * 3 + 1}s`; // Adjust animation duration
+    ball.style.animationDuration = `${Math.random() * 4 + 1}s`; // Adjust animation duration
     background.appendChild(ball);
   }
 }
