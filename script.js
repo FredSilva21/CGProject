@@ -45,7 +45,7 @@ class Neutron {
   }
 }
 
-// circle
+// Circle Ellipse
 class Circle {
   // Drawing a circle
   draw(x, y, radius) {
