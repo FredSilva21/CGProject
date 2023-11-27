@@ -71,7 +71,7 @@ class Atom {
     this.angle = 0;
     this.radius = 100;
     this.circle = new Circle();
-    this.electrons = new Electron("blue", 20, 100, 0);
+    this.electrons = new Electron("blue", 20, 100, 150, 0);
     this.innerElectrons = new Electron("blue", 20, 40, 0);
     this.neutrons = new Neutron("gray", 20, 0, 0);
   }
@@ -94,7 +94,7 @@ class Atom {
   drawElectrons(electron, numElectrons) {
     for (let i = 0; i < numElectrons; i++) {
       electron.draw(
-        this.x + electron.R * Math.cos((Math.PI / 180) * electron.ang),
+        this.x + electron.R * Math.cos((Math.PI / 360) * electron.ang),
         this.y + electron.R * Math.sin((Math.PI / 180) * electron.ang)
       );
       electron.ang += 360 / numElectrons;
