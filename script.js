@@ -50,7 +50,12 @@ class Circle {
   // Drawing a circle
   draw(x, y, radius) {
     ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.ellipse(x, y, 30, 100, Math.PI / 2, 0, 2 * Math.PI); // center
+
+    ctx.ellipse(x, y, 30, 120, Math.PI / 4, 0, 2 * Math.PI); // right
+
+    ctx.ellipse(x, y, 120, 30, Math.PI / 4, 0, 2 * Math.PI); // left
+
     ctx.strokeStyle = "rgba(255,255,255)";
     ctx.stroke();
   }
