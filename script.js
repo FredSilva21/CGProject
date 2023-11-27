@@ -19,7 +19,7 @@ class Electron {
   updatePosition(temperature) {
     const vibrationSpeed = 0.5 * (temperature / 50);
     this.ang += vibrationSpeed;
-    this.R += Math.sin(this.ang) * 4;
+    this.R += Math.sin(this.ang) * 6;
   }
 }
 
@@ -62,7 +62,6 @@ class Circle {
 
   updatePosition() {
     this.ang += 0.2;
-    this.R += Math.sin(this.ang) * 4;
   }
 }
 
@@ -114,9 +113,8 @@ class Atom {
   updatePosition() {
     this.circle.updatePosition();
     this.electrons.updatePosition(temperature * 2);
-    this.innerElectrons.updatePosition(temperature * 6);
+    this.innerElectrons.updatePosition(temperature * 2);
     this.neutrons.updatePosition(temperature);
-
     this.angle += 0.2;
     this.R += Math.sin(this.angle) * 4;
   }
