@@ -183,7 +183,7 @@ button:hover {
 
 input[type="range"] {
   cursor: ew-resize;
-  width: 10rem;
+  width: 8rem;
 }
 
 input:hover {
