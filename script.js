@@ -172,6 +172,7 @@ restart.addEventListener("click", () => {
   container.style.display = "block";
   temperatureRangeInput.value = 50;
   temperatureValueDisplay.textContent = 50;
+  temperatureValueDisplay.style.color = "black";
   restart.style.animation = "";
   temperature = 50;
 });
