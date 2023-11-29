@@ -173,6 +173,9 @@ restart.addEventListener("click", () => {
   secondPage.style.display = "none";
   let container = document.querySelector(".container");
   container.style.display = "block";
+  temperatureRangeInput.value = 50;
+  temperatureValueDisplay.textContent = 50;
+  restart.style.animation = "";
 });
 
 // Temperature control
