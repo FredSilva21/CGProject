@@ -176,6 +176,7 @@ restart.addEventListener("click", () => {
   temperatureRangeInput.value = 50;
   temperatureValueDisplay.textContent = 50;
   restart.style.animation = "";
+  temperature = 50;
 });
 
 // Temperature control
