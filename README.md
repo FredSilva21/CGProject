@@ -40,6 +40,6 @@ This project is a simple animation of atoms moving and colliding within a canvas
 
 ## Credits
 
-This project is created by [xnm-sdksdk] and [@FredSilva21]. Feel free to use, modify, and distribute it according to the project's license.
+This project is created by @xnm-sdksdk and [@FredSilva21]. Feel free to use, modify, and distribute it according to the project's license.
 
 Enjoy the atom animation! 🚀
