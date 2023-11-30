@@ -1,23 +1,45 @@
-# Simulador de Moléculas
+# Molecule Simulator
 
-**Equipa do Projeto:**
-- Alfredo Silva (Número de Aluno: 40210351)
-- Nuno Mendonça (Número de Aluno: 40210260)
+**Project Team:**
 
-## Descrição do Projeto
+- Alfredo Silva (Student Number: 40210351)
+- Nuno Mendonça (Student Number: 40210260)
 
-Este projeto consiste na criação de um Simulador de Moléculas, uma aplicação interativa que permite aos utilizadores explorar e compreender as diferentes reações moleculares de uma maneira intuitiva. O simulador oferece uma plataforma visual para visualizar a formação de moléculas e a dinâmica dos átomos e elétrons.
+This project is a simple animation of atoms moving and colliding within a canvas. Each atom consists of an outer circle, an inner circle, electrons, and a neutron. The electrons move in a vibrating motion influenced by temperature, and the atoms move randomly within the canvas. The animation is initiated by clicking a start button, and temperature control is provided to adjust the vibrational speed of the electrons.
 
-## Objetivos
+## How to Use
 
-Os principais objetivos do nosso projeto incluem:
+1. **Start Animation:**
 
-1. **Conexão de Átomos:** Os utilizadores poderão conectar dois átomos para formar moléculas através de cliques e movimentos do rato, ou permitir que as moléculas se formem automaticamente em resposta às condições específicas.
+   - Open `index.html` in a web browser.
+   - Click the "Start" button to initiate the atom animation.
 
-2. **Controlo de Temperatura e Pressão:** Os utilizadores poderão ajustar a temperatura e a pressão do ambiente para observar como essas variáveis afetam as reações químicas e as propriedades das moléculas.
+2. **Restart Animation:**
 
-3. **Gestão do Número de Átomos:** Haverá uma funcionalidade que permitirá aos utilizadores definir o número de átomos exibidos no elemento Canvas, tornando a experiência altamente personalizável.
+   - Click the "Restart" button to reset the animation.
 
-4. **Acompanhamento de Reações:** O simulador incluirá uma barra de progresso que se encherá à medida que ocorrem reações químicas, permitindo aos utilizadores visualizar o desenvolvimento das transformações químicas.
+3. **Temperature Control:**
+   - Adjust the temperature using the temperature range input.
+   - The color of the temperature display changes based on the temperature value.
 
-5. **Simulação do Movimento dos Elétrons:** O projeto também se propõe a simular o movimento dos elétrons ao redor de cada núcleo atômico, oferecendo uma representação precisa da dinâmica subatômica.
+## Files
+
+- **index.html:** Contains the HTML structure and links to the JavaScript and CSS files.
+- **style.css:** Defines the styling for the HTML elements.
+- **script.js:** Implements the logic for the atom animation, including the classes for electrons, neutrons, circles, and atoms.
+
+## Additional Information
+
+- The project uses HTML5 canvas for rendering the animation.
+- Atom objects are created with random initial positions and velocities to add diversity to the animation.
+- Collision detection is implemented to handle interactions between atoms.
+
+## Dependencies
+
+- No external libraries or frameworks are used.
+
+## Credits
+
+This project is created by [@xnm-sdksdk] and [@FredSilva21]. Feel free to use, modify, and distribute it according to the project's license.
+
+Enjoy the atom animation! 🚀
